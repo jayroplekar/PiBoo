@@ -9,7 +9,6 @@ from gpiozero import Button
 from gpiozero import DigitalOutputDevice
 
 
-
 PIN_Relay=12
 PIN_Switch=16
 
@@ -27,8 +26,10 @@ def button_callback():
     AudioProcess=subprocess.Popen(["omxplayer", audiofile])
     
     print("Button was pushed! Turn the motor on")
+    
     relay.on()
-    time.sleep(2.5) # 2.5 seconds minute on 2 rpm motor
+    time.sleep(2.5) # 2.5 seconds keep the relay high to drive 2 rpm motor= (2.5)*2*360/60=30 degrees
+    
     print("Turn the motor off")
     relay.off()
         
