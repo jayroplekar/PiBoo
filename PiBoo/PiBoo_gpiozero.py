@@ -15,7 +15,7 @@ PIN_Switch=16
 
 button=Button("BOARD16")
 relay=DigitalOutputDevice("BOARD12")   
-DIR = '/home/pi/Audio' # I 
+DIR = '/home/pi/Audio' # Directory where various audio files are
 files = [os.path.join(DIR, f) for f in os.listdir(DIR)]
 
 
