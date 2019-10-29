@@ -39,14 +39,14 @@ def button_callback():
     print("Turn the motor off")
     relay.off()
         
-def calibrate():
-    print("Calibrating by 3 degrees")
-    relay.on()
-    time.sleep(0.2)  # 3.75 seconds minute on 2 rpm motor is 45  deg
-                     # 2.5 seconds on 3 rpm is 45 degrees
-                     # found 3.0 with delay what centers the indexer
-    relay.off()
-
+def calibrate(num, _):
+    if num == signal.SIGUSR1:
+        print("Calibrating by 3 degrees")
+        relay.on()
+        time.sleep(0.2)  # 3.75 seconds minute on 2 rpm motor is 45  deg
+                         # 2.5 seconds on 3 rpm is 45 degrees
+                         # found 3.0 with delay what centers the indexer
+        relay.off()
 
 
 button.when_pressed=button_callback
