@@ -3,10 +3,13 @@ import time
 import subprocess
 import os
 import random
+import signal
 from signal import pause
 
 from gpiozero import Button
 from gpiozero import DigitalOutputDevice
+
+
 
 
 PIN_Relay=12
@@ -28,13 +31,27 @@ def button_callback():
     print("Button was pushed! Turn the motor on")
     
     relay.on()
-    time.sleep(2.5) # 2.5 seconds keep the relay high to drive 2 rpm motor= (2.5)*2*360/60=30 degrees
-    
+
+    time.sleep(3.0)  # 3.75 seconds minute on 2 rpm motor is 45  deg
+                     # 2.5 seconds on 3 rpm is 45 degrees
+                     # found 3.0 with delay what centers the indexer
+
     print("Turn the motor off")
     relay.off()
         
-    
+def calibrate():
+    print("Calibrating by 3 degrees")
+    relay.on()
+    time.sleep(0.2)  # 3.75 seconds minute on 2 rpm motor is 45  deg
+                     # 2.5 seconds on 3 rpm is 45 degrees
+                     # found 3.0 with delay what centers the indexer
+    relay.off()
+
+
+
 button.when_pressed=button_callback
+signal.signal(signal.SIGUSR1, calibrate)
+
 pause()
     
 
